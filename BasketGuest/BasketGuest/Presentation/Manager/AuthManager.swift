@@ -6,3 +6,13 @@
 //
 
 import Foundation
+import FirebaseAuth
+
+class AuthManager: ObservableObject {
+    @Published var isAuthenticated: Bool? = nil
+    
+    
+    func checkCurrentUser() {
+        self.isAuthenticated = Auth.auth().currentUser != nil
+    }
+}
