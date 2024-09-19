@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct BasketGuestApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
+    @State private var authManager: AuthManager = .init()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LaunchView()
+                .environmentObject(authManager)
         }
     }
 }
