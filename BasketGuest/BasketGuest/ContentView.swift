@@ -8,14 +8,28 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var isCheck: Bool = false
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Button {
+                    isCheck.toggle()
+                } label: {
+                    HStack {
+                        if isCheck {
+                            Image(systemName: "checkmark")
+                        }
+                        Text("스몰 포워드")
+                            .foregroundStyle(.black)
+                    }
+                    .padding(8)
+                    .font(.title3)
+                    
+                }
+                .buttonStyle(.bordered)
+                .tint(isCheck ? .accentColor : .none)
+                .controlSize(.regular)
         }
-        .padding()
+        
     }
 }
 
