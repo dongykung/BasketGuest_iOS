@@ -8,11 +8,38 @@
 import SwiftUI
 
 struct LaunchView: View {
+    
+    @EnvironmentObject private var authManager: AuthManager
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Group {
+            if let isAuthenticated = authManager.isAuthenticated {
+                if isAuthenticated {
+                    
+                } else {
+                    LoginView()
+                }
+            } else {
+                ZStack(alignment: .center) {
+            
+                    Image(.background)
+                        .resizable()
+                        .frame(width: .infinity, height: .infinity)
+                    
+                    ProgressView()
+                        .tint(.gray)
+                        .scaleEffect(1.5)
+                    
+                }
+                .ignoresSafeArea()
+            }
+        }
+        .onAppear {
+            authManager.checkCurrentUser()
+        }
     }
 }
 
 #Preview {
     LaunchView()
+        .environmentObject(AuthManager())
 }
